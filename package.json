@@ -1,0 +1,27 @@
+{
+  "name": "shortstack",
+  "version": "1.0.0",
+  "description": "**ShortStack** is a lightweight and fast **URL Shortener** built with **Node.js**, **Express**, and **Redis**.  \r It allows you to shorten long URLs into simple, shareable links — and can be extended with analytics, caching, and Nginx reverse proxy for production-grade learning.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbraTM/ShortStack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AbraTM/ShortStack/issues"
+  },
+  "homepage": "https://github.com/AbraTM/ShortStack#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "http-status-codes": "^2.3.0",
+    "nodemon": "^3.1.10"
+  }
+}
