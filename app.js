@@ -2,12 +2,26 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
+const path = require('path');
+const { setKV, getKV } = require('./database/redis');
 
 const { StatusCodes } = require('http-status-codes');
 
-app.get("/", (req, res) => {
-    res.status(StatusCodes.OK).send("<h1>ShortStack</h1>");
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get("/express", (req, res) => {
+    res.send("<h1>Test Successfull</h1>");
 });
+
+app.get("/setRedisKey", (req, res) => {
+    setKV("T", "Man");
+    res.send("<h1>Key Set</h1>")
+})
+
+app.get("/redis", (req, res) => {
+    const value = getKV("T");
+    res.send(`<h2>${value}</h2>`)
+})
 
 const PORT = process.env.PORT || 5000;
 
