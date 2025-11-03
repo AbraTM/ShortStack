@@ -3,28 +3,32 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
-const { setKV, getKV } = require('./database/redis');
-
+const { connectRedis } = require('./database/redis');
 const { StatusCodes } = require('http-status-codes');
 
+const errorHandlerMiddleware = require('./middleware/errorHandler');
+const notFoundMiddleware = require('./middleware/notFound');
+
+// Routers
+const permURLRouter = require('./routes/permURL');
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/permURL', permURLRouter);
 
-app.get("/express", (req, res) => {
-    res.send("<h1>Test Successfull</h1>");
-});
-
-app.get("/setRedisKey", (req, res) => {
-    setKV("T", "Man");
-    res.send("<h1>Key Set</h1>")
-})
-
-app.get("/redis", (req, res) => {
-    const value = getKV("T");
-    res.send(`<h2>${value}</h2>`)
-})
+// Core Middlewares
+app.use(errorHandlerMiddleware);
+app.use(notFoundMiddleware);
 
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-    console.log(`Server is listening at port ${PORT}...`);
-});
+const start = async() => {
+    try {
+        await connectRedis();
+        app.listen(PORT, () => {
+            console.log(`Server is listening at port ${PORT}...`);
+        });
+    } catch (error) {
+        console.error("Failed to start up server ", error);
+        process.exit(1);
+    }
+}
+start();
