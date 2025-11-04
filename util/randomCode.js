@@ -10,7 +10,7 @@ const generateRandomCode = (size = 8, alphabet = defaultAlphabet) => {
     while(result.length < size && i < bytes.length){
         const byte = bytes[i] & mask;
         if(byte < alphabet.length){
-            result.append(byte);
+            result.push(alphabet[byte]);
         }
         i++;
     }
