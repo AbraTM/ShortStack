@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/", redirectURLRouter);
 app.use('/permURL', permURLRouter);
 
+
 // Core Middlewares
 app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);
