@@ -11,7 +11,9 @@ const notFoundMiddleware = require('./middleware/notFound');
 
 // Routers
 const permURLRouter = require('./routes/permURL');
+const tempURLRouter = require('./routes/tempURL');
 const redirectURLRouter = require('./routes/redirectURL');
+const statsRouter = require('./routes/stats');
 
 // Allow JSON Request Bodies
 app.use(express.json());
@@ -19,8 +21,9 @@ app.use(express.json());
 // API Routes / Endpoints
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/", redirectURLRouter);
-app.use('/permURL', permURLRouter);
-
+app.use("/permURL", permURLRouter);
+app.use("/tempURL", tempURLRouter)
+app.use("/stats", statsRouter);
 
 // Core Middlewares
 app.use(errorHandlerMiddleware);
