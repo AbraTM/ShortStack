@@ -19,9 +19,12 @@
   },
   "homepage": "https://github.com/AbraTM/ShortStack#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
     "commander": "^14.0.2",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "figlet": "^1.9.3",
+    "gradient-string": "^3.0.0",
     "http-status-codes": "^2.3.0",
     "nodemon": "^3.1.10",
     "redis": "^5.9.0"

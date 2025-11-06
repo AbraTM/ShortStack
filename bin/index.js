@@ -1,16 +1,68 @@
 #!/usr/bin/env node
 
 const { program } = require('commander');
+const chalk = require('chalk');
+const figlet = require('figlet');
+const gradient = require('gradient-string');
 
-console.log("ShortStack");
+const API_URL = "http://localhost:5000";
 
+// CLI Banner
+function showBanner(){
+  console.clear();
+  const ascii_art = figlet.textSync('ShortStack', {
+	font: "Standard",
+	horizontalLayout: "default",
+	verticalLayout: "default",
+  });
+
+  console.log(gradient.rainbow.multiline(ascii_art));
+  console.log(chalk.bold.magentaBright(`                A Personal CLI based URL Shortener and Click Ananlytics\n\n`));
+}
+
+// CLI Interface
 program
-  .option('-u, --url <string>', 'URL to shorten')
+  .name('shortstack')
+  .description('Personal URL Shortener and Click Analytics.')
+  .version('0.0.1')
+  .showHelpAfterError('(use --help for available options)');
+
+
+// URL Shortening Command
+program
+  .command('shorten')
+  .description('Shortens a given URL.')
+  .requiredOption('-u, --url <string>', 'URL to shorten')
   .option('-c, --custom-code <string>', 'Custom Short Code')
-  .option('-t, --tags <string...>', 'Tags for the link');
+  .option('-t, --tags <string...>', 'Tags for the link')
+  .action(() => {
+	console.log("Shortening....");
+  });
 
-program.parse(process.argv);
 
-const options = program.opts();
-console.log("Options : ", options);
+// Show a URL's Stats
+program
+  .command('stats')
+  .description('Shows Clicks and other Stats for a short URL.')
+  .requiredOption('-u, --url <string>', 'Short Code')
+  .action(() => {
+	console.log("Stats....");
+  });
+
+
+// List out all the shortened URLs
+program
+  .command('list')
+  .description('List all shortened URLs')
+  .action(() => {
+	console.log("List out....");
+  });
+
+
+if(process.argv.length <= 2){
+  showBanner();
+  program.outputHelp();
+} else {
+  program.parse(process.argv);
+}
 
