@@ -20,6 +20,20 @@ const getStats = async(req, res) => {
      });
 }
 
+const getStatsForAll = async(req, res)  => {
+    const keyList = await client.keys("link:*");
+    const keys = keyList.filter((k) => !k.endsWith(":visitors"));
+    
+    let urlsData = [];
+    for(let key of keys){
+        const currKeyVal = await client.hGetAll(key);
+        urlsData.push(currKeyVal);
+    }
+
+    res.status(StatusCodes.OK).json({ urlsData });
+}
+
 module.exports = {
-    getStats
+    getStats,
+    getStatsForAll
 }

@@ -1,28 +1,27 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const express = require('express');
+const express = require("express");
 const app = express();
-const path = require('path');
-const { connectRedis } = require('./database/redis');
-const { StatusCodes } = require('http-status-codes');
-
-const errorHandlerMiddleware = require('./middleware/errorHandler');
-const notFoundMiddleware = require('./middleware/notFound');
+const path = require("path");
+const { connectRedis } = require("./database/redis");
+const { StatusCodes } = require("http-status-codes");
+const errorHandlerMiddleware = require("./middleware/errorHandler");
+const notFoundMiddleware = require("./middleware/notFound");
 
 // Routers
-const permURLRouter = require('./routes/permURL');
-const tempURLRouter = require('./routes/tempURL');
-const redirectURLRouter = require('./routes/redirectURL');
-const statsRouter = require('./routes/stats');
+const permURLRouter = require("./routes/permURL");
+const tempURLRouter = require("./routes/tempURL");
+const redirectURLRouter = require("./routes/redirectURL");
+const statsRouter = require("./routes/stats");
 
 // Allow JSON Request Bodies
 app.use(express.json());
 
 // API Routes / Endpoints
-app.use(express.static(path.join(__dirname, 'public')));
-app.use("/", redirectURLRouter);
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/su", redirectURLRouter);
 app.use("/permURL", permURLRouter);
-app.use("/tempURL", tempURLRouter)
+app.use("/tempURL", tempURLRouter);
 app.use("/stats", statsRouter);
 
 // Core Middlewares
@@ -30,15 +29,15 @@ app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);
 
 const PORT = process.env.PORT || 5000;
-const start = async() => {
-    try {
-        await connectRedis();
-        app.listen(PORT, () => {
-            console.log(`Server is listening at port ${PORT}...`);
-        });
-    } catch (error) {
-        console.error("Failed to start up server ", error);
-        process.exit(1);
-    }
-}
+const start = async () => {
+  try {
+    await connectRedis();
+    app.listen(PORT, () => {
+      console.log(`Server is listening at port ${PORT}...`);
+    });
+  } catch (error) {
+    console.error("Failed to start up server ", error);
+    process.exit(1);
+  }
+};
 start();
