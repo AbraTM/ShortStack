@@ -27,7 +27,10 @@ const getStatsForAll = async(req, res)  => {
     let urlsData = [];
     for(let key of keys){
         const currKeyVal = await client.hGetAll(key);
-        urlsData.push(currKeyVal);
+        urlsData.push({
+            shortLink: `${process.env.BASE_SHORTENED_URL}/${key.split(":")[1]}`,
+            ...currKeyVal
+        });
     }
 
     res.status(StatusCodes.OK).json({ urlsData });

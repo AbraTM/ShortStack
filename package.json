@@ -27,7 +27,8 @@
     "gradient-string": "^3.0.0",
     "http-status-codes": "^2.3.0",
     "nodemon": "^3.1.10",
-    "redis": "^5.9.0"
+    "redis": "^5.9.0",
+    "table": "^6.9.0"
   },
   "bin": {
     "shortstack": "./bin/index.js"
