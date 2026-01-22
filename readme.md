@@ -22,8 +22,9 @@ It allows you to shorten long URLs into simple, shareable links — and can be e
 |-------|-------------|
 | **Backend** | Node.js + Express |
 | **Database / Cache** | Redis |
-| **Web Server (optional)** | Nginx |
+| **Web Server** | Nginx |
 | **Environment Management** | dotenv |
-| **Containerization (optional)** | Docker / docker-compose |
+| **Containerization** | Docker / docker-compose |
+
 
 
