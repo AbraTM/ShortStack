@@ -11,7 +11,6 @@ It allows you to shorten long URLs into simple, shareable links — and can be e
 - ✨ Shorten long URLs into easy-to-share short codes  
 - 🔁 Redirect to original URLs via path parameters  
 - ⚡ In-memory caching using Redis for ultra-fast lookups  
-- 📊 Track click counts and analytics (With Prometheus and Grafana) 
 - 🔒 Nginx reverse proxy setup for production-style deployment  
 
 ---
@@ -23,8 +22,8 @@ It allows you to shorten long URLs into simple, shareable links — and can be e
 | **Backend** | Node.js + Express |
 | **Database / Cache** | Redis |
 | **Web Server** | Nginx |
-| **Environment Management** | dotenv |
 | **Containerization** | Docker / docker-compose |
+
 
 
 
